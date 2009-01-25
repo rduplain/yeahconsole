@@ -1,0 +1,102 @@
+Please read all of this to fully understand options/features of yeahconsole...
+Since I'm lazy this  file is also a CHANGELOG...
+
+New in 0.3.4:
+Readded the help message (yeahconsole -h).
+Resizing the console with the mouse has been improved.
+
+New in 0.3.3:
+
+Support for rxvt-unicode has been added, you can specify 
+yeahconsole*term:urxvt (or urxvtc if you have urxvtd running) in your .Xdefaults.
+An option to restart the terminal has been added (yeahconsole*restart: 1).
+All commandline option are passed to the terminal now (if you specify 
+"-e someprog" it must be the last option)
+The autoconf crap has been removed....
+
+Installation: make;make install
+Yeahconsole can be configured via xresources:
+
+put something like  
+yeahconsole*foo:value
+in your .Xdefaults.
+
+"foo" can be any standard xresource from xterm (see man xterm) or:
+
+restart:        0 (default) or 1 should the terminal restart?
+term:           terminal to use (valid:urxvt, urxvtc, xterm(default))
+screenWidth:    width (defaults to display width)
+consoleHeight:  number of lines (defaults to 10)
+xOffset:        x position (defaults to 0)
+aniDelay:       delay for the slide animation (defaults to 40)
+stepSize:	    step size for the animation (defaults to 1)
+handleWidth:    width for the resize handle (defaults to 3)
+handleColor:    color for the handle    (defaults to grey70)
+
+Keycombos are specified as follows: 
+
+[any combination of "Win" "Alt" "Control" or "None"]+[name of key]
+
+eg. ControlAlt+y,  Control+asciitilde, Win+c, ControlAltWin+y ,None+Menu,....
+(the order of modifiers doesn't matter)
+
+toggleKey:      key combo that toggles yeahconsole (defaults to ControlAlt+y)
+keyBigger:      increase  height of yeahconsole (default: Control+KP_Add)
+keySmaller:     decrease height of yeahconsole (default: Control+KP_Subtract) 
+keyFull:	    toggle fullscreenmode (default: Alt+F11)
+
+
+xOffset and screenWidth are useful if you use a xinerama setup.
+Here is what mine looks like:
+
+yeahconsole*background:black
+yeahconsole*foreground:green
+yeahconsole*screenWidth:1152
+yeahconsole*aniDelay:30
+yeahconsole*toggleKey:None+Menu
+
+If you need the name of a "special" key use xev  or have a look in
+/usr/include/X11/keysymdef.h.
+
+New in 0.3.2:  
+
+Yeahconsole looks up it xresources by its name, that means you can have multiple
+instances of yeahconsole with different settings. To make this happen just make
+a symbolic link to yeahconsole with a different name, e.g yeahconsole2, and
+yeahconsole will look up it's resources in the form "yeahconsole2*foo:value".
+You have to specify atleast different toggle keys for all running instances.
+
+A "-e" option has been added to start an initial programm at startup. 
+
+The console window can be switched to fullscreen by hitting Alt+F11 (settable via
+yeahconsole*keyFull).
+
+A "yeahconsole*stepSize:" option has been added to control the slide animation,
+any value greater 0 will be added to the stepsize so the animation will be
+faster and less cpu hungry. If you specify 0 the animation is disabled.
+
+New in 0.3.1:
+All focus issues got ironed out (I hope so).
+A dummy xerror function has been added to avoid crashes.
+Modifier and key are now specified with one resource(see below).
+Changed resource "height" "consoleHeight" since it interferes with xterm.
+
+
+New in 0.3:
+
+The console window can now be resized (hit Control + keypad {plus/minus} or 
+simply drag the grey border with your mouse). Improved focus handling. The
+height is now counted in number of lines. Some new xresources (see below).
+
+New in 0.2:
+
+The modifier for the toggle key can now be configured through xresources.You can
+also use yeahconsole without a modifier.See below for details.
+
+Yeahconsole puts an xterm window on top of your screen that behaves like a 
+console found in many games ( similar to kuake). It's visibility can be
+toggled by a keyboard shortcut (Control+Alt+y).
+You will need xterm version 168 or higher (comes with XFree86 4.2.1) to make
+this work.
+
+
